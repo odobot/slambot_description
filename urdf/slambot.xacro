@@ -1,0 +1,228 @@
+<?xml version="1.0" ?>
+<robot name="slambot"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find slambot_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find slambot_description)/urdf/lidar.xacro" />
+  <xacro:include filename="$(find slambot_description)/urdf/slambot.trans" />
+  <xacro:include filename="$(find slambot_description)/urdf/ros2_control.xacro" />
+
+  <link name="book"/>
+
+  <joint name="world_joint" type="fixed">
+    <parent link="book"/>
+    <child link="base_footprint"/>
+    <origin xyz="0.0 0.0 0.042" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+
+  <link name="base_footprint"/>
+
+  <joint name="joint_name" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.00987467831388459 -0.012693643128019162 0.04586813096704769" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.017076" iyy="0.036386" izz="0.04162" ixy="0.000136" iyz="-7e-06" ixz="0.002016"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="steel_satin"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="85mm_Wheel_v1_1">
+    <inertial>
+      <origin xyz="5.052317619477775e-07 -0.0024691276756819425 2.6835229172952543e-07" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00047" iyy="0.000848" izz="0.00047" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.051437 -0.112987 0.002704" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/85mm_Wheel_v1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="opaque202209238"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.051437 -0.112987 0.002704" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/85mm_Wheel_v1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="85mm_Wheel_v1_2">
+    <inertial>
+      <origin xyz="4.490573239160356e-07 0.0024686671421895456 2.6835229177853137e-07" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00047" iyy="0.000848" izz="0.00047" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.051437 0.137613 0.002704" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/85mm_Wheel_v1_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="opaque202209238"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.051437 0.137613 0.002704" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/85mm_Wheel_v1_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Caster_40mm_Wheel_support_v1_1">
+    <inertial>
+      <origin xyz="0.0066638755762642166 -0.00046989751975173855 -0.007305440300120874" rpy="0 0 0"/>
+      <mass value="0.008"/>
+      <inertia ixx="2e-06" iyy="2e-06" izz="3e-06" ixy="0.0" iyz="-0.0" ixz="1e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.093563 0.068313 0.014004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_support_v1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="opaque180180180"/>
+    </visual>
+    <collision>
+      <origin xyz="0.093563 0.068313 0.014004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_support_v1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Caster_40mm_Wheel_support_v1_2">
+    <inertial>
+      <origin xyz="0.006663875576261982 -0.00046989751975129446 -0.007305440300108176" rpy="0 0 0"/>
+      <mass value="0.008"/>
+      <inertia ixx="2e-06" iyy="2e-06" izz="3e-06" ixy="0.0" iyz="-0.0" ixz="1e-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.093563 -0.043687 0.014004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_support_v1_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="opaque180180180"/>
+    </visual>
+    <collision>
+      <origin xyz="0.093563 -0.043687 0.014004" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_support_v1_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Caster_40mm_Wheel_30mm_v1_1">
+    <inertial>
+      <origin xyz="4.771445450135747e-07 0.008799769733257051 3.328152857889899e-07" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="3e-06" iyy="6e-06" izz="3e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.078063 0.077113 0.032804" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_30mm_v1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="opaque255255255"/>
+    </visual>
+    <collision>
+      <origin xyz="0.078063 0.077113 0.032804" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_30mm_v1_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="Caster_40mm_Wheel_30mm_v1_1">
+    <material>Gazebo/White</material>
+    <!-- <mu1 value="0.001"/>
+    <mu2 value="0.001"/> -->
+  </gazebo>
+
+  <link name="Caster_40mm_Wheel_30mm_v1_2">
+    <inertial>
+      <origin xyz="4.771445426959842e-07 0.008799769733257426 3.328152985149213e-07" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="3e-06" iyy="6e-06" izz="3e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.078063 -0.034887 0.032804" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_30mm_v1_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="opaque255255255"/>
+    </visual>
+    <collision>
+      <origin xyz="0.078063 -0.034887 0.032804" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://slambot_description/meshes/Caster_40mm_Wheel_30mm_v1_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <gazebo reference="Caster_40mm_Wheel_30mm_v1_2">
+    <material>Gazebo/White</material>
+    <!-- <mu1 value="0.001"/>
+    <mu2 value="0.001"/> -->
+  </gazebo>
+
+  <joint name="Revolute 1" type="continuous">
+    <origin xyz="0.051437 0.112987 -0.002704" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="85mm_Wheel_v1_1"/>
+    <axis xyz="-0.0 -1.0 -0.0"/>
+  </joint>
+
+  <joint name="Revolute 2" type="continuous">
+    <origin xyz="0.051437 -0.137613 -0.002704" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="85mm_Wheel_v1_2"/>
+    <axis xyz="-0.0 -1.0 0.0"/>
+  </joint>
+
+  <joint name="Revolute 3" type="continuous">
+    <origin xyz="-0.093563 -0.068313 -0.014004" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="Caster_40mm_Wheel_support_v1_1"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+  </joint>
+
+  <joint name="Revolute 4" type="continuous">
+    <origin xyz="-0.093563 0.043687 -0.014004" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="Caster_40mm_Wheel_support_v1_2"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+  </joint>
+
+  <joint name="Revolute 5" type="continuous">
+    <origin xyz="0.0155 -0.0088 -0.0188" rpy="0 0 0"/>
+    <parent link="Caster_40mm_Wheel_support_v1_1"/>
+    <child link="Caster_40mm_Wheel_30mm_v1_1"/>
+    <axis xyz="-0.0 1.0 0.0"/>
+  </joint>
+
+  <joint name="Revolute 6" type="continuous">
+    <origin xyz="0.0155 -0.0088 -0.0188" rpy="0 0 0"/>
+    <parent link="Caster_40mm_Wheel_support_v1_2"/>
+    <child link="Caster_40mm_Wheel_30mm_v1_2"/>
+    <axis xyz="-0.0 1.0 0.0"/>
+  </joint>
+
+</robot>
